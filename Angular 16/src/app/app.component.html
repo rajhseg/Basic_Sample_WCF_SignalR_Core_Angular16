@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="columnleft">
+    <ol>
+      <li><a [routerLink]="['sample']">Sample Examples</a></li>
+      <li><a [routerLink]="['merge']">Merge, MergeAll, MergeMap</a></li>
+      <li><a [routerLink]="['concat']">Concat, ConcatAll, ConcatMap</a></li>
+      <li><a [routerLink]="['take']">Take vs TakeLast vs TakeUntil vs TakeWhile</a></li>
+      <li><a [routerLink]="['scan']">Scan</a></li>
+      <li><a [routerLink]="['debounce']">Debounce</a></li>
+      <li><a [routerLink]="['buffer']">Buffer</a></li>
+      <li><a [routerLink]="['group']">Group By</a></li>
+      <li><a [routerLink]="['map']">Map Differences</a></li>
+      <li><a [routerLink]="['openclose']">OpenClose</a></li>
+      <li><a [routerLink]="['useani']">Use Animations</a></li>
+      <li><a [routerLink]="['admin/profile']">Admin profile</a></li>
+      <li><a [routerLink]="['admin/settings']">Admin settings</a></li>
+      <li><a [routerLink]="['admin/about']">Admin about</a></li>
+      <li><a [routerLink]="['lang']">Language</a></li>
+      <li><a [routerLink]="['jquery']">Jquery</a></li>
+    </ol>
+  </div>
+
+  <div class="columnright">
+    <div [@routeAnimations]="getRouteAnimationData()">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

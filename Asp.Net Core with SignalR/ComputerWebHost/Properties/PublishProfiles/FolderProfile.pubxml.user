@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>F:\ComputerWCF\</_PublishTargetUrl>
+    <History>True|2023-07-08T05:42:13.2760720Z;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/ComputerLibrary.dll">
+      <publishTime>07/08/2023 11:12:12</publishTime>
+    </File>
+    <File Include="bin/ComputerLibrary.pdb">
+      <publishTime>07/08/2023 11:12:12</publishTime>
+    </File>
+    <File Include="bin/ComputerService.dll">
+      <publishTime>07/08/2023 11:12:12</publishTime>
+    </File>
+    <File Include="bin/ComputerService.pdb">
+      <publishTime>07/08/2023 11:12:12</publishTime>
+    </File>
+    <File Include="bin/ComputerWebHost.dll">
+      <publishTime>07/08/2023 11:12:12</publishTime>
+    </File>
+    <File Include="bin/ComputerWebHost.pdb">
+      <publishTime>07/08/2023 11:12:12</publishTime>
+    </File>
+    <File Include="ComputerWeb.svc">
+      <publishTime>07/08/2023 10:40:00</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>07/08/2023 11:12:12</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

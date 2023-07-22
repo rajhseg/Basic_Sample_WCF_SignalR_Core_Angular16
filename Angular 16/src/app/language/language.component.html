@@ -1,0 +1,8 @@
+<p>language works!</p>
+<select #combo (change)="select(combo.value)">
+  <option value="en">English</option>
+  <option value="au">Austria</option>
+  <option value="ta">Tamil</option>
+</select>
+{{'title' | translate}}
+{{isDev}} &nbsp; Environment : {{env}}

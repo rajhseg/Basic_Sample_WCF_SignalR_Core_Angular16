@@ -1,0 +1,30 @@
+<p>openclose works!</p>
+<br />
+<div>
+  <button (click)="click()">click</button>
+  <button (click)="enableAnimation()">Enable animation</button>
+  <button (click)="disableAnimation()">Disable Animations</button>
+</div>
+<br />
+
+<div [@.disabled]="animationsDisabled">
+  <div [@openClose]="isOpen ? 'open' : 'close'"
+       (@openClose.start)="startEvent($event)"
+       (@openClose.done)="doneEvent($event)">
+    <p>this is animate div</p>
+  </div>
+
+  <div [@queryAnimate]="exp">
+    <h1>Title</h1>
+    <div class="content">sample content from div</div>
+  </div>
+
+</div>
+
+<!-- list.component.html -->
+<button (click)="toggle()">Show / Hide Items</button>
+<div [@listAnimation]="items.length">
+  <div *ngFor="let item of items">
+    {{ item }}
+  </div>
+</div>

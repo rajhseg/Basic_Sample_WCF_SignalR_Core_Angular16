@@ -1,0 +1,9 @@
+<div style="padding:20px">
+  <mat-form-field appearance="outline">
+    <mat-label>{{label}}</mat-label>
+    <mat-icon matPrefix>home</mat-icon>
+    <input [(ngModel)]="value" matInput placeholder="{{label}}" (input)="inputChanges()" />
+    <mat-icon matSuffix>add</mat-icon>
+    <mat-hint>{{hint}}</mat-hint>
+  </mat-form-field>
+</div>

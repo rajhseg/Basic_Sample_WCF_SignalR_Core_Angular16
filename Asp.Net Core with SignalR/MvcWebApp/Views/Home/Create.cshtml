@@ -1,0 +1,126 @@
+﻿@model Person
+    
+///<reference path="../lib/jquery/dist/jquery.min.js" />
+
+<form asp-action="create" asp-controller="home" method="post">
+    <fieldset>
+        <table>
+            <tr>
+                <td class="divBlock">
+                    <label asp-for="Id">Id</label>
+                </td>
+                <td>
+                    <input asp-for="Id" type="text" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="divBlock">
+                    <label asp-for="Name">Name</label>
+                </td>
+                <td>
+                    <input asp-for="Name" type="text" />
+                    <span asp-validation-for="Name" class="text-danger" />
+                </td>
+            </tr>
+            <tr>
+                <td class="divBlock">
+                    <label asp-for="Age">Age</label>
+                </td>
+                <td>
+                    <input type="number" asp-for="Age" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="divBlock">
+                    <label asp-for="DepartmentType">Department Type</label>
+                </td>
+                <td>
+                    <select id="ddlDepartments" asp-for="DepartmentType" asp-items="@Html.GetEnumSelectList<Department>()">
+                        <option value="">Please Select</option>
+                    </select>
+                </td>
+            </tr>            
+            <tr>
+                <td class="divBlock">
+                    <label asp-for="Book">Book</label>
+                </td>
+                <td>
+                    <select id="ddlBooks" asp-for="Book">
+                        <option value="">Please Select</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        
+
+        <div class="divBlock">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+        <div>
+            <span></span>
+        </div>
+    </fieldset>
+</form>
+
+    @section Scripts{
+            
+
+        <script type="text/javascript">            
+            $(function () {                
+                $('select').change(function () {
+                    var value = $(this).val();
+
+                    var id = $(this).attr("id");
+
+                    if (id == "ddlDepartments") {
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/Home/AjaxBooks",
+                            data: { value: value },
+
+                            success: function (response) {
+
+                            PopulateDropDown("#ddlBooks", response.books);
+                                        
+                            }
+                            ,
+                            failure: function (response) {
+                                alert(response.responseText);
+                            },
+                            error: function (response) {
+                                alert(response.responseText);
+                            }
+                        })
+                    }
+                });
+            });
+
+            function PopulateDropDown(dropDownId, list) {
+                if (list != null && list.length > 0) {  
+                    console.log(list);
+
+                $(dropDownId)
+                    .find('option')
+                    .remove()
+                    .end()
+                    .append('<option value="">Please Select</option>');
+
+                $.each(list, function (key, value) {
+                    console.log('key '+key);
+                    console.log('value '+ value.name);
+                                     
+                    $(dropDownId)
+                            .append($("<option></option>")
+                            .attr("value", value.id)
+                                    .text(value.name));
+                        });
+                }
+            }
+        </script>
+    
+   }
+

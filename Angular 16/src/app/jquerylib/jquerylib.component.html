@@ -1,0 +1,114 @@
+
+<button id="refresh">Refresh</button>
+<select (change)="changeTheme($event)">
+  <option value="0">Gradient</option>
+  <option value="1">Andriod</option>
+</select>
+<br/>
+<br/>
+<div style="width:800px; height:80px; border:1px solid gray">
+
+  <button id="find">Find</button>
+  <button id="closet">Closet</button>
+  <button id="parent">Parent</button>
+  <button id="parents">Parents</button>
+  <button id="parentuntil">Parent Until</button>
+  <button id="before">Before</button>
+  <button id="after">After</button>
+  <button id="fadeout">FadeOut</button>
+  <button id="fadein">FadeIn</button>
+  <button id="fadetoggle">FadeToggle</button>
+  <button id="children">Children</button>
+  <button id="remove">Remove</button>
+  <button id="filter">Filter</button>
+  <button id="not">Not</button>
+  <button id="attr">Attr</button>
+  <button id="prop">Prop</button>
+  <button id="end">End</button>
+  <button id="slideup">SlideUp</button>
+  <button id="slidedown">SlideDown</button>
+  <button id="slidetoggle">SlideToggle</button>
+  <button id="eq">Find index Element</button>
+  <button id="even">Even</button>
+  <button id="odd">Odd</button>
+  <button id="next">Next</button>
+  <button id="nextall">NextAll</button>
+  <button id="prev">Prev</button>
+  <button id="prevall">PrevAll</button>
+  <button id="contents">Contents</button>
+  <button id="wrap">Wrap</button>
+  <button id="append">Append</button>
+  <button id="prepand">Prepand</button>
+
+</div>
+<br/>
+
+<div>
+
+  <br />
+  <div id="subcontainer">
+    <div>
+      <p>Para1</p>
+      <p>Para2</p>
+      <p id="para3">Para3</p>
+      <p>Para4</p>
+      <p>Para5</p>
+      <ul>
+        <li>list1</li>
+        <li id="list1">list2</li>
+        <li>
+          list 3
+          <ol>
+            <li>list 4</li>
+            <li id="list">list 5</li>
+          </ol>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br />
+  <br />
+  <div>
+    <!-- Tab links -->
+    <div class="tab">
+      <button class="tablinks" (click)="openJavascript($event, 'javascript')">Javascript</button>
+      <button class="tablinks" (click)="openJavascript($event, 'html')">Html</button>
+    </div>
+
+
+    <!-- Tab content -->
+    <div id="javascript" class="tabcontent">
+      <div>
+        <pre>
+        <code id="codecontainer" [highlight]="code" [languages]="['typescript']">
+    
+      </code>
+    </pre>
+      </div>
+    </div>
+    <div id="html" class="tabcontent">
+      <div>
+        <pre>
+        <code id="codecontainer2" [highlight]="code" [languages]="['xml']">
+    
+      </code>
+    </pre>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:none">
+    <div id="loginContainer">
+      <div>
+        <label>Name : </label>
+        <input type="text" />
+      </div>
+      <div>
+        <label>Password : </label>
+        <input type="password" />
+      </div>
+    </div>
+    <button id="btnRemove">Remove click event</button>
+
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<mat-select [(ngModel)]="value.scope" class="select">
+  <mat-option value="">All</mat-option>
+  <mat-option value="at">Austria</mat-option>
+  <mat-option value="jn">Japan</mat-option>
+</mat-select>
+<mat-divider [vertical]="true" class="divider"></mat-divider>
+<input matInput [(ngModel)]="value.query" (change)="controlChange()"
+       [placeholder]="placeholder" type="text" name="advanced search" class="input" />
+

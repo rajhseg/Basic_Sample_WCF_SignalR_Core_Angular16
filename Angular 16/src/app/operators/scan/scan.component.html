@@ -1,0 +1,30 @@
+<p>scan works!</p>
+
+<div>
+  <button (click)="GetToken()">Login</button>
+</div>
+<br/>
+<div>
+  <button id="click">click</button>
+</div>
+<br />
+<button (click)="connectSignalR()">Connect SignalR</button>
+<br />
+<div>
+  <button (click)="getData()">GetData</button>
+</div>
+<div>
+  <button (click)="SendMessage()">Send Message</button>
+</div>
+<ol>
+  <li *ngFor="let item of CharList">{{item}}</li>
+</ol>
+
+<div style="display: block;">
+  <canvas baseChart
+          [datasets]="chartData"
+          [labels]="chartLabels"
+          [options]="chartOptions"
+          [legend]="chartLegend"
+          [type]="chartType" width="500px" height="500px"></canvas>
+</div>

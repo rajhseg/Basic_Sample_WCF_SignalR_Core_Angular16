@@ -1,0 +1,14 @@
+.container{
+    width:98%;
+    display:flex;
+    padding:20px;
+}
+
+.columnLeft {
+    width: 10%;
+    float:left;
+}
+
+.columnright{
+    margin-left:10%;
+}
