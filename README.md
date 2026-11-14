@@ -1,5 +1,6 @@
 # Angular16_With_Asp.NetCore
-This repo is currently in development consists of basic sample for some features implemented in Angular 16, Asp.net Core basic template including SignalR Integration, WCF and Angular 16 consists.
+This repo is currently in development so it may consists of bugs or issues.
+this repo consists of basic sample for some features implemented in Angular 16, Asp.net Core basic template including SignalR Integration, WCF and Angular 16 consists.
 
 1. Run the following code in cmd: npm i -g @angular/cli
 2. Then Run the RealTime.Server solution
