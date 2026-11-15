@@ -88,11 +88,11 @@ export class ScanComponent implements OnInit, OnDestroy {
   }
 
  async GetToken() {
-    this.token = await this.tokenService.GetToken();
+    await this.tokenService.GetToken();  
   }
 
   async LoginScanComponent() {
-    this.token = await this.tokenService.GetToken();
+    await this.tokenService.GetToken();
   }
 
 }

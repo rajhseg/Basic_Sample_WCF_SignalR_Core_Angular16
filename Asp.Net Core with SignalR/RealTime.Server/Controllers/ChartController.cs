@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.HttpSys;
 using Microsoft.AspNetCore.SignalR;
 using RealTime.Server.HugConfig;
+using RealTime.Server.Middlewares;
 using RealTime.Server.Models;
 using System.Web.Http;
 using AuthorizeAttribute = Microsoft.AspNetCore.Authorization.AuthorizeAttribute;
@@ -17,6 +18,7 @@ namespace RealTime.Server.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles ="Admin")]
+    [ServiceFilter(typeof(CustomAntiForgeryFilter))]
     public class ChartController : ControllerBase
     {
         private readonly TimerManager _timerManager;
@@ -30,8 +32,8 @@ namespace RealTime.Server.Controllers
 
 
         [Route("")]
-        [HttpGet]
-        public IActionResult Get()
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        public IActionResult Post()
         {            
             if (!_timerManager.IsTimerStarted)
                 _timerManager.PrepareTimer(() => hubContext.Clients.All.SendAsync("TransferChartData", DataManager.GetData().ToArray()));

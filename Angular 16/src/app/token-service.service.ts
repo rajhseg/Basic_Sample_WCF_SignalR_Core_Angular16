@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,23 @@ export class TokenServiceService {
 
   public Token: string = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cSer: CookieService) {
   }
 
-  async GetToken(): Promise<string> {
+  async GetToken(): Promise<void> {
+    let prop = {}
     if (this.Token == '') {
-      let result: any = await this.http.get('https://localhost:5001/api/login').toPromise()
-      this.AccessToken = result.token
-      this.Token = result.token;
+      await this.http.post('https://localhost:5001/api/login', { UserName:'admin1', Password:'password2', Role: ''}, 
+        { withCredentials: true}).toPromise();
+      
+      this.GetAntiForgeryToken();
     }
-    return this.Token;
+  }
+
+   GetAntiForgeryToken() {
+   this.http.get('https://localhost:5001/api/antiforgery/token', { withCredentials: true}).subscribe((x :any) => {
+      let c = x.faq;
+      localStorage.setItem("anti_token", c);
+    });
   }
 }

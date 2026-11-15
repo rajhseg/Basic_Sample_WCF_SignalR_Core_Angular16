@@ -21,16 +21,17 @@ namespace RealTime.Server.Controllers
             _userInfoService = userInfoService; 
         }
 
-        public IActionResult Post(UserInfo userInfo)
+        [HttpPost]
+        public IActionResult Post([FromBody]UserInfo userInfo)
         {
-            if(userInfo == null)
+            if (userInfo == null)
             {
                 return BadRequest();
             }
 
             var data = this._userInfoService.GetUserInfo(userInfo.UserName);
 
-            if(data == null || data.Password!= userInfo.Password)
+            if (data == null || data.Password != userInfo.Password)
             {
                 return Unauthorized();
             }
@@ -38,29 +39,34 @@ namespace RealTime.Server.Controllers
             var authClaims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, data.UserName),
+                new Claim(ClaimTypes.NameIdentifier, data.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
-            
+
             authClaims.Add(new Claim(ClaimTypes.Role, data.Role));
-            
 
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("CPYM000OLlERTASDF456Vp1OH7Xzyr7gHuw1qvUC5dcGtGPLW"));
 
             var token = new JwtSecurityToken(
                 issuer: issuer,
                 audience: audience,
-                expires: DateTime.Now.AddHours(3),
+                expires: DateTime.UtcNow.AddHours(3),
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                 );
 
-
             var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
 
-            return Ok(new
+            Response.Cookies.Append("access_token", jwtToken, new CookieOptions()
             {
-                Token = jwtToken
+                HttpOnly = true,
+                Path = "/",
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Expires = DateTime.UtcNow.AddMinutes(3),
             });
+
+            return Ok();
         }
     }
 }

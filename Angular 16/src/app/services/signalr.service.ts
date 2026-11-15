@@ -29,16 +29,9 @@ export class SignalrService {
   async StartConnection() {
     let accessToken: string = '';
 
-    accessToken = await this.tokenService.GetToken();
-
-    console.log('accessTokenn');
-    console.log(accessToken);
-
     this.hubConnection = new SignalR.HubConnectionBuilder()
       .withUrl('https://localhost:5001/chart', {
-        accessTokenFactory: () => accessToken,        
-        skipNegotiation: true,
-        transport: SignalR.HttpTransportType.WebSockets
+        withCredentials: true
       }).withAutomaticReconnect().build();
 
     this.hubConnection.start().then(() => console.log("Connection started")).catch((err) => console.log("error " + err));
@@ -56,7 +49,7 @@ export class SignalrService {
   }
 
   public startHttpRequest(){
-    this.http.get('https://localhost:5001/api/chart')
+    this.http.post('https://localhost:5001/api/chart', {})
       .subscribe(res => {
         console.log(res);
       });     

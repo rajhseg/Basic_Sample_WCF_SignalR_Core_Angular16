@@ -21,7 +21,7 @@ namespace RealTime.Server.Middlewares
         {
             if (next != null)
             {
-                string authHeader = context.Request.Headers["Authorization"];
+                string authHeader = context.Request.Cookies["access_token"];
                 var audience = "http://localhost:4200";
                 var issuer = "http://localhost:14297";
                 var apikey = "CPYM000OLlERTASDF456Vp1OH7Xzyr7gHuw1qvUC5dcGtGPLW";
@@ -30,7 +30,7 @@ namespace RealTime.Server.Middlewares
                 {
                     var tokenHandler = new JwtSecurityTokenHandler();
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(apikey));
-                    var token = authHeader.Split(" ").Last();
+                    var token = authHeader;
 
                     tokenHandler.ValidateToken(token, new TokenValidationParameters
                     {
@@ -49,7 +49,8 @@ namespace RealTime.Server.Middlewares
                     // Validate user exist in system
                     var userIdentity = this.tokenValidatorService.ValidateToken(validatedToken);
                     
-                    context.User = userIdentity;                
+                    context.User = userIdentity; 
+                    context.Request.Headers["Authorization"] = $"Bearer {token}";
                 }               
 
                 await next(context);
